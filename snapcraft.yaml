@@ -1,4 +1,4 @@
-# * Copyright 2024 Lukas Spies <Lukas@previewqt.org>
+# * Copyright 2025 Lukas Spies <Lukas@previewqt.org>
 # * SPDX-License-Identifier: GPL-2.0-or-later
 name: previewqt
 confinement: strict
@@ -12,7 +12,6 @@ architectures:
 
 adopt-info: previewqt
 
-
 description: Very fast and simple file previewer with a clean interface, supporting a very large number of all kinds of files, including images, videos, and documents.
 summary: Simple and fast application for previewing all kinds of files.
 
@@ -21,7 +20,6 @@ issues: https://gitlab.com/lspies/previewqt/-/issues
 source-code: https://gitlab.com/lspies/previewqt
 website: https://previewqt.org
 donation: https://previewqt.org/donate
-
 
 apps:
   previewqt:
