@@ -3,12 +3,11 @@
 name: previewqt
 confinement: strict
 grade: stable
-base: core22
+base: core24
 architectures:
-  - build-on: [amd64]
+  amd64:
+    build-on: [amd64]
     build-for: [amd64]
-  - build-on: [arm64]
-    build-for: [arm64]
 
 adopt-info: previewqt
 
@@ -42,8 +41,9 @@ apps:
       - audio-playback
       - network
       - network-bind
-      - cups
       - session-plug
+    environment:
+      LD_LIBRARY_PATH: "$LD_LIBRARY_PATH:$SNAP/usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR/libproxy"
 
 compression: lzo
 
@@ -52,7 +52,7 @@ plugs:
     interface: dbus
     bus: session
     name: org.previewqt.PreviewQt
-    
+
 slots:
   session-slot:
     interface: dbus
@@ -62,7 +62,7 @@ slots:
 parts:
   previewqt:
     plugin: cmake
-    source: https://previewqt.org/downloads/source/previewqt-3.0.tar.gz
+    source: https://previewqt.org/downloads/source/previewqt-4.0.tar.gz
     parse-info:
       - usr/local/share/metainfo/org.previewqt.PreviewQt.metainfo.xml
     override-build: |
@@ -71,21 +71,21 @@ parts:
       snapcraftctl build
     cmake-parameters:
       - -DCMAKE_BUILD_TYPE=Release
-      - -DRAW=ON
-      - -DIMAGEMAGICK=OFF
-      - -DGRAPHICSMAGICK=ON
-      - -DDEVIL=ON
-      - -DFREEIMAGE=ON
-      - -DPOPPLER=OFF
-      - -DQTPDF=ON
-      - -DLIBARCHIVE=ON
-      - -DVIDEO_QT=ON
-      - -DVIDEO_MPV=ON
-      - -DEXIV2=ON
-      - -DPUGIXML=ON
-      - -DMOTIONPHOTO=ON
-      - -DPHOTOSPHERE=ON
-      - -DLCMS2=ON
+      - -DWITH_LIBRAW=ON
+      - -DWITH_IMAGEMAGICK=OFF
+      - -DWITH_GRAPHICSMAGICK=ON
+      - -DWITH_DEVIL=ON
+      - -DWITH_FREEIMAGE=ON
+      - -DWITH_POPPLER=OFF
+      - -DWITH_QTPDF=ON
+      - -DWITH_LIBARCHIVE=ON
+      - -DWITH_VIDEO_QT=ON
+      - -DWITH_VIDEO_MPV=ON
+      - -DWITH_EXIV2=ON
+      - -DWITH_MOTIONPHOTO=ON
+      - -DWITH_PHOTOSPHERE=ON
+      - -DWITH_LCMS2=ON
+      - -DWITH_EPUB=ON
     build-packages:
       - libexiv2-dev
       - libexpat1-dev
@@ -102,7 +102,7 @@ parts:
       - libmpv-dev
       - libgraphicsmagick++1-dev
       - libgraphicsmagick1-dev
-      - libcups2-dev
+      - libproxy1v5
     stage-packages:
       - libheif1
       - libjpeg8
@@ -110,15 +110,14 @@ parts:
       - libx265-199
       - libgif7
       - kimageformat-plugins
-      - libraw20
+      - libraw23t64
       - ghostscript
       - libdevil1c2
       - libfreeimage3
-      - libarchive13
-      - libmpv1
-      - libjxr0
+      - libarchive13t64
+      - libmpv2
+      - libjxr0t64
       - libdjvulibre21
-      - libgraphicsmagick-q16-3
-      - libgraphicsmagick++-q16-12
+      - libgraphicsmagick-q16-3t64
+      - libgraphicsmagick++-q16-12t64
       - graphicsmagick
-      - libcups2
