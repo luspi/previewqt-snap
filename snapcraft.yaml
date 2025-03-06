@@ -121,3 +121,4 @@ parts:
       - libgraphicsmagick-q16-3t64
       - libgraphicsmagick++-q16-12t64
       - graphicsmagick
+      - gsettings-desktop-schemas
