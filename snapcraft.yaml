@@ -62,7 +62,7 @@ slots:
 parts:
   previewqt:
     plugin: cmake
-    source: https://previewqt.org/downloads/source/previewqt-4.0.tar.gz
+    source: https://previewqt.org/downloads/source/previewqt-5.0.tar.gz
     parse-info:
       - usr/local/share/metainfo/org.previewqt.PreviewQt.metainfo.xml
     override-build: |
@@ -79,8 +79,8 @@ parts:
       - -DWITH_POPPLER=OFF
       - -DWITH_QTPDF=ON
       - -DWITH_LIBARCHIVE=ON
-      - -DWITH_VIDEO_QT=ON
-      - -DWITH_VIDEO_MPV=ON
+      - -DWITH_QTMULTIMEDIA=ON
+      - -DWITH_LIBMPV=OFF
       - -DWITH_EXIV2=ON
       - -DWITH_MOTIONPHOTO=ON
       - -DWITH_PHOTOSPHERE=ON
@@ -98,8 +98,6 @@ parts:
       - libraw-dev
       - libdevil-dev
       - libfreeimageplus-dev
-      - libarchive-dev
-      - libmpv-dev
       - libgraphicsmagick++1-dev
       - libgraphicsmagick1-dev
       - libproxy1v5
@@ -115,7 +113,6 @@ parts:
       - libdevil1c2
       - libfreeimage3
       - libarchive13t64
-      - libmpv2
       - libjxr0t64
       - libdjvulibre21
       - libgraphicsmagick-q16-3t64
