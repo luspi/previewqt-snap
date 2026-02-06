@@ -1,4 +1,4 @@
-# * Copyright 2025 Lukas Spies <Lukas@previewqt.org>
+# * Copyright 2026 Lukas Spies <Lukas@previewqt.org>
 # * SPDX-License-Identifier: GPL-2.0-or-later
 name: previewqt
 confinement: strict
@@ -25,8 +25,8 @@ apps:
     extensions:
       - kde-neon-6
     common-id: org.previewqt.PreviewQt
-    desktop: usr/local/share/applications/org.previewqt.PreviewQt.desktop
-    command: usr/local/bin/previewqt
+    desktop: usr/share/applications/org.previewqt.PreviewQt.desktop
+    command: usr/bin/previewqt
     slots:
       - session-slot
     plugs:
@@ -42,10 +42,12 @@ apps:
       - network
       - network-bind
       - session-plug
+      - ffmpeg-2404
+      - browser-support
+      - shared-memory
     environment:
-      LD_LIBRARY_PATH: "$LD_LIBRARY_PATH:$SNAP/usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR/libproxy"
-      QML_DISABLE_DISK_CACHE: "1"
-      QML_DISABLE_AOT: "1"
+      LD_LIBRARY_PATH: $SNAP/ffmpeg-platform/usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR:$LD_LIBRARY_PATH
+      PATH: $SNAP/ffmpeg-platform/usr/bin:$PATH
 
 compression: lzo
 
@@ -54,6 +56,10 @@ plugs:
     interface: dbus
     bus: session
     name: org.previewqt.PreviewQt
+  ffmpeg-2404:
+    interface: content
+    target: ffmpeg-platform
+    default-provider: ffmpeg-2404
 
 slots:
   session-slot:
@@ -66,13 +72,15 @@ parts:
     plugin: cmake
     source: https://previewqt.org/downloads/source/previewqt-5.0.tar.gz
     parse-info:
-      - usr/local/share/metainfo/org.previewqt.PreviewQt.metainfo.xml
+      - usr/share/metainfo/org.previewqt.PreviewQt.metainfo.xml
     override-build: |
       ln -sf /usr/include/GraphicsMagick/Magick++ /usr/include/Magick++
       ln -sf /usr/include/GraphicsMagick/magick /usr/include/magick
       snapcraftctl build
     cmake-parameters:
       - -DCMAKE_BUILD_TYPE=Release
+      - -DCMAKE_INSTALL_PREFIX=/usr
+      - -DQT_QML_NO_CACHEGEN=ON
       - -DWITH_LIBRAW=ON
       - -DWITH_IMAGEMAGICK=OFF
       - -DWITH_GRAPHICSMAGICK=ON
@@ -120,4 +128,4 @@ parts:
       - libgraphicsmagick-q16-3t64
       - libgraphicsmagick++-q16-12t64
       - graphicsmagick
-      - gsettings-desktop-schemas
+      - libpulse0
