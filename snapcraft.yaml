@@ -44,6 +44,8 @@ apps:
       - session-plug
     environment:
       LD_LIBRARY_PATH: "$LD_LIBRARY_PATH:$SNAP/usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR/libproxy"
+      QML_DISABLE_DISK_CACHE: "1"
+      QML_DISABLE_AOT: "1"
 
 compression: lzo
 
