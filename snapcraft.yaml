@@ -70,7 +70,7 @@ slots:
 parts:
   previewqt:
     plugin: cmake
-    source: https://previewqt.org/downloads/source/previewqt-5.0.tar.gz
+    source: https://previewqt.org/downloads/source/previewqt-6.0.tar.gz
     parse-info:
       - usr/share/metainfo/org.previewqt.PreviewQt.metainfo.xml
     override-build: |
@@ -111,6 +111,9 @@ parts:
       - libgraphicsmagick++1-dev
       - libgraphicsmagick1-dev
       - libproxy1v5
+      - libopenslide-dev
+      - libappimage-dev
+      - libarchive-dev
     stage-packages:
       - libheif1
       - libjpeg8
@@ -129,3 +132,5 @@ parts:
       - libgraphicsmagick++-q16-12t64
       - graphicsmagick
       - libpulse0
+      - libopenslide0
+      - libappimage1.0abi1t64
